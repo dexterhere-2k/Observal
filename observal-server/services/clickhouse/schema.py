@@ -8,6 +8,7 @@ the SQL constant cannot be compressed further.
 """
 
 import structlog
+from loguru import logger as optic
 
 import services.clickhouse.client as _client
 
@@ -506,6 +507,7 @@ async def init_clickhouse():
 
     Raises on unreachable server so startup fails fast.
     """
+    optic.debug("init_clickhouse called")
     from services.clickhouse.client import clickhouse_health
 
     if not await clickhouse_health():
